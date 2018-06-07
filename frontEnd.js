@@ -1,4 +1,5 @@
-console.log("Made it here");
+includeJS('/socket.io/socket.io.js');
+var socket = io();
 
  var pauseButton = document.querySelector(".glyphicon-pause");
  pauseButton.addEventListener("click", function() {
@@ -14,6 +15,11 @@ playButton.addEventListener("click", function(){
 var submitButton = document.querySelector("#submit");
 submitButton.addEventListener("click", function(){
 	var link = document.getElementById("url").innerText;
+	socket.emit('new link', link);
 	console.log(link);
 });
 
+function includeJS(incFile)
+{
+   document.write('<script type="text/javascript" src="'+ incFile+ '"></script>');
+}
