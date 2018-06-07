@@ -12,6 +12,15 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
   console.log('a user connected');
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+
+  socket.on('new link', function(msg){
+  	console.log("New link: " + msg);
+  })
+
 });
 
 http.listen(3000, function(){
