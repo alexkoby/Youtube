@@ -1,6 +1,7 @@
-includeJS('/socket.io/socket.io.js');
+includeJS('/socket.js');
 var socket = io();
 var player;
+
 //Executes once the youtube API is finished loading
 function onYouTubeIframeAPIReady() {
     console.log("Inside onYouTubeIframeAPIReady");
@@ -18,8 +19,11 @@ function onYouTubeIframeAPIReady() {
 //Executes once the player is ready -- after onYoutubeIframeAPIReady()
 function onPlayerReady(event) {
     console.log("Inside onPlayerReady" + player + " " + event);
-    event.target.playVideo();
+    /*event.target.playVideo();
     console.log("Played");
+    */
+    socket.emit('ready', 'ready');
+    
 }
 
 function onError() {
