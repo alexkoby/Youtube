@@ -23,7 +23,6 @@ function onPlayerReady(event) {
     console.log("Played");
     */
     socket.emit('ready', 'ready');
-    
 }
 
 function onError() {
@@ -63,15 +62,25 @@ submitButton.addEventListener("click", function() {
     console.log("Link is: " + newVideo);
     socket.emit('new link', newVideo);
 
-
 });
-
+//Link Changes
 socket.on('new link', function(msg) {
     console.log("Received a new link in server");
     player.cueVideoById(msg, 0, "large");
     player.pauseVideo();
 });
+//When new user connects and asks everyone for their time
+socket.on('time', function(msg){
+    if(msg == 'time?'){
+        socket.emit('isPlaying', player.getPlayerState());
+        socket.emit('time', player.getCurrentTime());
+    }
+    else{
+        player.seekTo(msg);
+    }
 
+});
+//Pause or Play
 socket.on('event', function(msg) {
     if (msg == 'play') {
         console.log("Event in apiScript inside play");
