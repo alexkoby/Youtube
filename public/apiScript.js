@@ -49,6 +49,12 @@ playButton.addEventListener("click", function() {
     console.log("Clicked play button");
 });
 
+var bringEveryoneToMySpotButton = document.querySelector("#bringEveryoneToMySpot");
+bringEveryoneToMySpotButton.addEventListener("click", function(){
+    socket.emit('event', 'pause');
+    socket.emit('bringEveryoneToMe', player.getCurrentTime());
+})
+
 //Submit button sends the newVideo code in the 'new link' channel when it's clicked
 var submitButton = document.querySelector("#submit");
 submitButton.addEventListener("click", function() {
