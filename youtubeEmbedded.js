@@ -65,8 +65,10 @@ io.on('connection', function(socket) {
     		}
     	}
     });
-
-
+    //Triggers when someone clicks the 'Bring Everyone To Me' button and sends out the time to everyone
+    socket.on('bringEveryoneToMe', function(msg){
+        io.emit('time', msg);
+    })
 
     //Triggers when websocket gets a $msg from the 'new link' channel, which occurs when the user hits the submit button
     socket.on('new link', function(msg) {
